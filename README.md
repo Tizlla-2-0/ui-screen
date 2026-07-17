@@ -4,7 +4,7 @@ Tizlla UI screen + sub-task tracker.
 
 **Live:** https://tizlla-2-0.github.io/ui-screen/
 
-Data is stored in [`data/store.json`](data/store.json) in this repo (synced via the GitHub API), so desktop and mobile share the same board.
+Data is stored in the cloud (Cloudflare KV) so desktop and mobile stay in sync. Task data is not kept in browser localStorage.
 
 ## Login
 
@@ -17,18 +17,21 @@ npm install
 npm run dev:web
 ```
 
-Create a `.env.local` file:
+Optional `.env.local`:
 
 ```bash
-VITE_GITHUB_OWNER=Tizlla-2-0
-VITE_GITHUB_REPO=ui-screen
-VITE_GITHUB_TOKEN=github_pat_...
+VITE_API_BASE=https://ui-screen-api.prateektomar005.workers.dev
 ```
 
-Use a **fine-grained PAT** with access only to `Tizlla-2-0/ui-screen` and **Contents: Read and write**.
+## API worker
 
-## Deploy
+The sync API lives in [`worker/`](worker/) (Cloudflare Worker + KV).
 
-Push to `main`. GitHub Actions builds and deploys Pages.
+```bash
+cd worker
+wrangler deploy
+```
 
-Set repo secret `VITE_GITHUB_TOKEN` (same fine-grained PAT) so saves work in production.
+## Deploy (GitHub Pages)
+
+Push to `main`. Actions builds and deploys the static app.

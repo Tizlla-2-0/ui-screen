@@ -1,0 +1,7 @@
+name = "ui-screen-api"
+main = "src/index.ts"
+compatibility_date = "2026-07-17"
+
+[[kv_namespaces]]
+binding = "STORE"
+id = "589ec31b6fe4457ca25d1a06b8a44378"

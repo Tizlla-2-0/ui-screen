@@ -1,8 +1,10 @@
-import { loadStoreFromGitHub, saveStoreToGitHub } from "./githubStore";
+import { getAuthHeader } from "./auth";
 import type { Priority, Screen, Status, Store, SubTask } from "./types";
 
+const API_BASE =
+  import.meta.env.VITE_API_BASE || "https://ui-screen-api.prateektomar005.workers.dev";
+
 let cache: Store | null = null;
-let sha: string | null = null;
 let writeQueue: Promise<void> = Promise.resolve();
 
 function now(): string {
@@ -17,35 +19,47 @@ function findScreen(store: Store, id: string): Screen | undefined {
   return store.screens.find((s) => s.id === id);
 }
 
+async function api<T>(method: string, body?: unknown): Promise<T> {
+  const auth = getAuthHeader();
+  if (!auth) throw new Error("Not signed in");
+
+  const res = await fetch(`${API_BASE}/store`, {
+    method,
+    headers: {
+      Authorization: auth,
+      ...(body !== undefined ? { "Content-Type": "application/json" } : {}),
+    },
+    body: body !== undefined ? JSON.stringify(body) : undefined,
+  });
+
+  if (!res.ok) {
+    let message = res.statusText;
+    try {
+      const data = (await res.json()) as { error?: string };
+      if (data.error) message = data.error;
+    } catch {
+      // ignore
+    }
+    throw new Error(message || `Request failed (${res.status})`);
+  }
+  return (await res.json()) as T;
+}
+
 async function ensureLoaded(): Promise<Store> {
-  if (cache && sha) return cache;
-  const loaded = await loadStoreFromGitHub();
-  cache = loaded.store;
-  sha = loaded.sha;
+  if (cache) return cache;
+  const store = await api<Store>("GET");
+  if (!store || !Array.isArray(store.screens)) {
+    cache = { screens: [] };
+  } else {
+    cache = store;
+  }
   return cache;
 }
 
 async function persist(next: Store): Promise<void> {
   cache = next;
   writeQueue = writeQueue.then(async () => {
-    if (!sha) {
-      const loaded = await loadStoreFromGitHub();
-      sha = loaded.sha;
-    }
-    try {
-      sha = await saveStoreToGitHub(next, sha!);
-    } catch (err) {
-      // On SHA conflict, reload and retry once
-      const message = err instanceof Error ? err.message : "";
-      if (message.includes("409") || message.includes("sha")) {
-        const loaded = await loadStoreFromGitHub();
-        sha = loaded.sha;
-        // Keep our next as source of truth for this client
-        sha = await saveStoreToGitHub(next, sha);
-        return;
-      }
-      throw err;
-    }
+    await api<Store>("PUT", next);
   });
   await writeQueue;
 }
@@ -77,8 +91,7 @@ export async function createScreen(input: {
     createdAt: timestamp,
     updatedAt: timestamp,
   };
-  const next = { screens: [...store.screens, screen] };
-  await persist(next);
+  await persist({ screens: [...store.screens, screen] });
   return screen;
 }
 
@@ -103,19 +116,18 @@ export async function updateScreen(
     priority: input.priority !== undefined ? input.priority : screen.priority,
     updatedAt: now(),
   };
-  const next = {
+  await persist({
     screens: store.screens.map((s) => (s.id === id ? updated : s)),
-  };
-  await persist(next);
+  });
   return updated;
 }
 
 export async function deleteScreen(id: string): Promise<void> {
   const store = await ensureLoaded();
   const before = store.screens.length;
-  const next = { screens: store.screens.filter((s) => s.id !== id) };
-  if (next.screens.length === before) throw new Error("Screen not found");
-  await persist(next);
+  const screens = store.screens.filter((s) => s.id !== id);
+  if (screens.length === before) throw new Error("Screen not found");
+  await persist({ screens });
 }
 
 export async function createSubTask(
@@ -139,10 +151,9 @@ export async function createSubTask(
     subTasks: [...screen.subTasks, subTask],
     updatedAt: timestamp,
   };
-  const next = {
+  await persist({
     screens: store.screens.map((s) => (s.id === screenId ? updatedScreen : s)),
-  };
-  await persist(next);
+  });
   return subTask;
 }
 
@@ -168,10 +179,9 @@ export async function updateSubTask(
     subTasks: screen.subTasks.map((t) => (t.id === subTaskId ? updatedSub : t)),
     updatedAt: updatedSub.updatedAt,
   };
-  const next = {
+  await persist({
     screens: store.screens.map((s) => (s.id === screenId ? updatedScreen : s)),
-  };
-  await persist(next);
+  });
   return updatedSub;
 }
 
@@ -190,8 +200,7 @@ export async function deleteSubTask(
     subTasks,
     updatedAt: now(),
   };
-  const next = {
+  await persist({
     screens: store.screens.map((s) => (s.id === screenId ? updatedScreen : s)),
-  };
-  await persist(next);
+  });
 }
