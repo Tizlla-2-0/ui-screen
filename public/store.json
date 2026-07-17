@@ -1,0 +1,183 @@
+{
+  "screens": [
+    {
+      "id": "68511d24-42d2-4c56-a3f0-041d65c0d2b7",
+      "name": "Loading Screen",
+      "description": "LoadingScene/LoadingScreen.prefab",
+      "status": "in_progress",
+      "priority": "medium",
+      "subTasks": [
+        {
+          "id": "f5c8b62a-dcfa-4cb5-9fdc-99ad946b6631",
+          "title": "Main Game logo",
+          "status": "todo",
+          "notes": "",
+          "createdAt": "2026-07-16T18:16:15.381Z",
+          "updatedAt": "2026-07-16T18:16:19.923Z"
+        }
+      ],
+      "createdAt": "2026-07-16T17:59:13.951Z",
+      "updatedAt": "2026-07-16T18:18:26.548Z"
+    },
+    {
+      "id": "c743693c-0753-4549-9c21-1adba39b398a",
+      "name": "Connection Error",
+      "description": "LoadingScene/ConnectionError.prefab",
+      "status": "done",
+      "priority": "medium",
+      "subTasks": [],
+      "createdAt": "2026-07-16T18:07:17.655Z",
+      "updatedAt": "2026-07-16T18:16:40.859Z"
+    },
+    {
+      "id": "6c831de5-d56b-4e28-9daa-93b7b1c935a7",
+      "name": "Main Menu",
+      "description": "MainMenuScene/MainMenu.prefab",
+      "status": "done",
+      "priority": "medium",
+      "subTasks": [],
+      "createdAt": "2026-07-16T18:07:17.655Z",
+      "updatedAt": "2026-07-16T19:10:05.017Z"
+    },
+    {
+      "id": "19589594-e650-40b2-b618-6666fd645b56",
+      "name": "Character Select",
+      "description": "MainMenuScene/CharacterSelect.prefab",
+      "status": "todo",
+      "priority": "medium",
+      "subTasks": [],
+      "createdAt": "2026-07-16T18:07:17.655Z",
+      "updatedAt": "2026-07-16T18:07:17.655Z"
+    },
+    {
+      "id": "ade217b2-6760-4842-a44c-d32ccfc0d498",
+      "name": "Settings",
+      "description": "MainMenuScene/Settings.prefab",
+      "status": "todo",
+      "priority": "medium",
+      "subTasks": [],
+      "createdAt": "2026-07-16T18:07:17.655Z",
+      "updatedAt": "2026-07-16T18:07:17.655Z"
+    },
+    {
+      "id": "610d59d7-b6aa-4e62-b166-8d04a236fb9e",
+      "name": "Store",
+      "description": "MainMenuScene/Store.prefab",
+      "status": "todo",
+      "priority": "medium",
+      "subTasks": [],
+      "createdAt": "2026-07-16T18:07:17.655Z",
+      "updatedAt": "2026-07-16T18:07:17.655Z"
+    },
+    {
+      "id": "d92e4acd-2dff-48c4-be53-247ae7bbff52",
+      "name": "Online Mode Select",
+      "description": "MainMenuScene/OnlineModeSelect.prefab",
+      "status": "todo",
+      "priority": "medium",
+      "subTasks": [],
+      "createdAt": "2026-07-16T18:07:17.655Z",
+      "updatedAt": "2026-07-16T18:07:17.655Z"
+    },
+    {
+      "id": "d1e89d5d-6539-4d19-944f-a3a1318bd161",
+      "name": "Public Matchmaking",
+      "description": "MainMenuScene/PublicMatchmaking.prefab",
+      "status": "todo",
+      "priority": "medium",
+      "subTasks": [],
+      "createdAt": "2026-07-16T18:07:17.655Z",
+      "updatedAt": "2026-07-16T18:07:17.655Z"
+    },
+    {
+      "id": "13968509-acac-42b6-b232-c63792154340",
+      "name": "Match Found",
+      "description": "MainMenuScene/MatchFound.prefab",
+      "status": "todo",
+      "priority": "medium",
+      "subTasks": [],
+      "createdAt": "2026-07-16T18:07:17.655Z",
+      "updatedAt": "2026-07-16T18:07:17.655Z"
+    },
+    {
+      "id": "83d347a9-ad47-4ade-a8f8-6f3ce98adf1d",
+      "name": "Room Match Menu",
+      "description": "MainMenuScene/RoomMatchMenu.prefab",
+      "status": "todo",
+      "priority": "medium",
+      "subTasks": [],
+      "createdAt": "2026-07-16T18:07:17.655Z",
+      "updatedAt": "2026-07-16T18:07:17.655Z"
+    },
+    {
+      "id": "6ff56648-ca14-4b38-9c05-010253a92092",
+      "name": "Room Lobby",
+      "description": "MainMenuScene/RoomLobby.prefab",
+      "status": "todo",
+      "priority": "medium",
+      "subTasks": [],
+      "createdAt": "2026-07-16T18:07:17.655Z",
+      "updatedAt": "2026-07-16T18:07:17.655Z"
+    },
+    {
+      "id": "53c7c362-c423-4786-ae1b-62c784331f23",
+      "name": "Gameplay HUD",
+      "description": "MainGameScene/GameplayHUD.prefab",
+      "status": "todo",
+      "priority": "medium",
+      "subTasks": [],
+      "createdAt": "2026-07-16T18:07:17.655Z",
+      "updatedAt": "2026-07-16T18:07:17.655Z"
+    },
+    {
+      "id": "592f8a4e-4d02-4021-907b-6aa51e342df9",
+      "name": "Pause Menu",
+      "description": "MainGameScene/PauseMenu.prefab",
+      "status": "todo",
+      "priority": "medium",
+      "subTasks": [],
+      "createdAt": "2026-07-16T18:07:17.655Z",
+      "updatedAt": "2026-07-16T18:07:17.655Z"
+    },
+    {
+      "id": "4b42ed6e-c363-4f75-b30a-c302da6ef505",
+      "name": "Round Intro",
+      "description": "MainGameScene/RoundIntro.prefab",
+      "status": "todo",
+      "priority": "medium",
+      "subTasks": [],
+      "createdAt": "2026-07-16T18:07:17.655Z",
+      "updatedAt": "2026-07-16T18:07:17.655Z"
+    },
+    {
+      "id": "1bedf821-40c4-45c4-8d5c-cf4df7f5a5f2",
+      "name": "Victory Panel",
+      "description": "MainGameScene/VictoryPanel.prefab",
+      "status": "todo",
+      "priority": "medium",
+      "subTasks": [],
+      "createdAt": "2026-07-16T18:07:17.655Z",
+      "updatedAt": "2026-07-16T18:07:17.655Z"
+    },
+    {
+      "id": "0d947ef7-3f7e-43a6-b95d-b97abd1b0a24",
+      "name": "Defeat Panel",
+      "description": "MainGameScene/DefeatPanel.prefab",
+      "status": "todo",
+      "priority": "medium",
+      "subTasks": [],
+      "createdAt": "2026-07-16T18:07:17.655Z",
+      "updatedAt": "2026-07-16T18:07:17.655Z"
+    },
+    {
+      "id": "2fd5db3e-8d21-45c3-9ee7-718b5875e7a1",
+      "name": "Match Summary",
+      "description": "MainGameScene/MatchSummary.prefab",
+      "status": "todo",
+      "priority": "medium",
+      "subTasks": [],
+      "createdAt": "2026-07-16T18:07:17.655Z",
+      "updatedAt": "2026-07-16T18:07:17.655Z"
+    }
+  ]
+}
