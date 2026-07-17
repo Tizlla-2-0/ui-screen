@@ -1,52 +1,34 @@
 # UI Screen & Task Manager
 
-Lightweight tracker for UI screens and their sub-tasks — like a small Jira board focused on screens.
+Tizlla UI screen + sub-task tracker.
 
-**Live:** https://prateektomar.github.io/ui-screen-task-manager/  
-*(Sign in with the credentials configured in the app.)*
+**Live:** https://tizlla-2-0.github.io/ui-screen/
 
-Data is stored in your browser (`localStorage`), seeded from [`public/store.json`](public/store.json) on first visit.
+Data is stored in [`data/store.json`](data/store.json) in this repo (synced via the GitHub API), so desktop and mobile share the same board.
 
-## Requirements
+## Login
 
-- Node.js 18+
+Use the app credentials configured in the project.
 
-## Setup
+## Local development
 
 ```bash
 npm install
-```
-
-## Run locally
-
-```bash
 npm run dev:web
 ```
 
-Open [http://localhost:5173](http://localhost:5173).
+Create a `.env.local` file:
 
-> Optional: `npm run dev` still starts the old Express API + Vite if you want file-based `data/store.json` syncing locally. The hosted GitHub Pages build uses browser storage only.
+```bash
+VITE_GITHUB_OWNER=Tizlla-2-0
+VITE_GITHUB_REPO=ui-screen
+VITE_GITHUB_TOKEN=github_pat_...
+```
 
-## Features
+Use a **fine-grained PAT** with access only to `Tizlla-2-0/ui-screen` and **Contents: Read and write**.
 
-- Login gate (session in `localStorage`)
-- Create, edit, and delete **screens** (name, description, status, priority)
-- Add, edit, and delete **sub-tasks** under each screen
-- Sub-task progress (`done/total`)
-- Filter screens by name, status, or priority
+## Deploy
 
-## Scripts
+Push to `main`. GitHub Actions builds and deploys Pages.
 
-| Script | Description |
-|--------|-------------|
-| `npm run dev:web` | Vite web UI (uses browser storage) |
-| `npm run build` | Production build for GitHub Pages |
-| `npm run preview` | Preview the production build |
-| `npm run dev` | Optional: API + web together |
-| `npm run lint` | Lint |
-
-## Deploy (GitHub Pages)
-
-Push to `main`. The workflow in [`.github/workflows/deploy-pages.yml`](.github/workflows/deploy-pages.yml) builds and deploys automatically.
-
-In the repo: **Settings → Pages → Source: GitHub Actions**.
+Set repo secret `VITE_GITHUB_TOKEN` (same fine-grained PAT) so saves work in production.
